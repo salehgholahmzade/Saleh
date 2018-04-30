@@ -1,0 +1,144 @@
+\documentclass[oneside]{article}
+
+\usepackage{siunitx}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{minted}
+\usepackage{lastpage}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{caption} 
+\captionsetup[table]{skip=5pt}
+\usepackage{setspace}
+\usepackage[absolute]{textpos}
+\usepackage{xepersian} % Always last package to load
+
+\settextfont{XW Zar}
+\setlatintextfont{Adobe Garamond Pro}
+\setlatinmonofont[Scale=0.8]{Monaco}
+\defpersianfont\nastaliqfont{IranNastaliq}
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+\linespread{1.5}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand*{\fancypagenumber}{%
+\fancyfoot[C]{صفحه
+\thepage
+از
+\pageref{LastPage}}
+}
+\fancypagenumber
+\fancypagestyle{plain}{\fancypagenumber}
+% insert syntax highlighted code from a file
+\newcommand{\inputcode}[2]{\inputminted[mathescape,%
+                                                 linenos=false,%
+                                                 formatcom=\small\setstretch{1}]{#1}{#2}}%
+%\renewcommand{\theFancyVerbLine}{\sffamily\scriptsize
+%\textcolor[rgb]{0.5,0.5,1.0}{\oldstylenums{\arabic{FancyVerbLine}}}}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8} 
+\renewcommand{\bottomfraction}{0.8} 
+\renewcommand{\floatpagefraction}{0.8}
+\title{عنوان پروژه}
+\author{نام افراد}
+\begin{document}
+\maketitle\thispagestyle{empty}
+\begin{textblock}{5}(6.5,2)\nastaliqfont
+\noindent\Large
+بسم الله الرحمن الرحیم
+\end{textblock}
+
+\section{اصول اولیه}
+\subsection{تیتر کوچک}
+متن را به صورت معمولی در ادیتور 
+ \lr{texmaker}
+وارد می کنید اگر خواستید در جایی از کلمه یا جمله انگلیسی استفاده کنید به صورت مثلا
+\lr{Python}
+و یا 
+\lr{\texttt{printf}}
+استفاده نمایید. توجه نمایید که در حالت دومی نوع فونت از نوع مونو هست و با حالت اولی فرق دارد.
+
+جهت رفتن به پاراگراف بعدی از یک خط فاصله استفاده نمایید. برای گذاشتن شکل به کد شکل داخل سند لاتک دقت کنید.
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{Pictures/test}
+\caption{این یک شکل هست که به صورت تست قرار گرفته است.}
+\label{fig:test}
+\end{figure}
+توجه کنید که 
+\autoref{fig:test}
+به صورت لینک نشان داده می شود. گذاشتن جدول نیز به صورت مشابه می باشد به عنوان مثال به
+\autoref{tbl:test}
+توجه کنید. همچنین برای نوشتن فرمول از محیط ریاضی در 
+\lr{\LaTeX}
+بایستی استفاده کنید:
+\begin{equation}\label{eq:test}
+\int_0^x \frac{x+1}{\sin(x)}=\sum_{i=0}^\infty\dots
+\end{equation}
+به عنوان مثال به 
+\autoref{eq:test}
+توجه کنید.
+\begin{table}
+\caption{این یک جدول تست می باشد. جداول دیگر نیز به همین شکل میتواند درست بشود.}
+\label{tbl:test}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{rrr}\toprule
+تیتر اول & تیتر دوم & تیتر سوم
+\\ \midrule
+ستون اول & ستون دوم & ستون سوم 
+\\
+ستون اول & ستون دوم & ستون سوم 
+\\
+ستون اول & ستون دوم & ستون سوم 
+\\
+\bottomrule
+\end{tabular}
+\end{table}
+همچنین شما به راحتی می توانید به طرز زیبایی کد های مورد نظر خود را داخل سند قرار بدهید. فقط توجه نمایید که بایستی کد ها را داخل یک فایل مجزا قرار دهید و به این صورت داخل سند فراخوانی کنید:
+\lr{\inputcode{c++}{Codes/c.cpp}}
+و یا کد پایتون را به این شکل قرار دهید:
+\lr{\inputcode{python}{Codes/p.py}}
+البته توجه کنید که تا حد امکان از آوردن کدهای اضافی داخل متن پرهیز شود و فقط در صورت نیاز چند خط کد ضروری داخل متن ارائه شود. توجه کنید که قسمت و زیر قسمت های منطقی داخل متن ارائه و دنبال شود.
+
+\section{طریقه اجرا}
+دی وی دی
+\lr{TexLive}
+را از روی سپهر نصب کنید. 
+برای اجرای برنامه لاتک سعی کنید که حتما فونت های مورد نیاز در این سند را داشته باشید، در غیر این صورت فونت های مورد نیاز که درون شاخه فشرده شده قرار گرفته اند را روی سیستم خود نصب کنید. برای کامپایل کردن سند از برنامه
+\lr{\XeLaTeX}
+استفاده می کنیم. دستور زیر را در شاخه ای که فایل فشرده را باز کرده اید درون ترمینال اجرا کنید:
+
+\lr{\texttt{xelatex --shell-escape main}}
+
+توجه کنید که برای درست کردن سند به طرز صحیح بایستی حتما پایتون روی سیستم شما نصب باشد و همچنین بسته
+\lr{\texttt{Pygments}}
+را نیز داشته باشید. به صورت اتوماتیک اگر 
+\lr{\texttt{Anaconda}}
+را نصب کرده باشید نباید مشکلی وجود داشته باشد. برای گرفتن خروجی درست برچسب ها و شماره صفحه ها در لاتک بایستی دو بار برنامه لاتک را کامپایل کنید. 
+پیشنهاد می شود کتاب مقدمه ای نه چندان کوتاه بر لاتک و همچنین آموزش 
+\lr{\XePersian}
+را مطالعه نمایید. برای استفاده از آموزش
+\lr{\XePersian}
+دستور 
+\lr{\texttt{texdoc xepersian}}
+را درون پنجره
+\lr{Run}
+اجرا کنید. درون اینترنت نیز اطلاعات زیادی راجع به لاتک وجود دارد.
+\begin{tcolorbox}
+توجه کنید که اگر پایتون و بسته مورد نظر روی سیستم شما نصب نشده باشد کد ها را به درستی خروجی نخواهید گرفت.
+\end{tcolorbox}
+
+\section{طریقه تحویل}
+گزارش خروجی در قالب یک فایل زیپ ارائه خواهد شد که به صورت
+\lr{Project-StNum1-StNum2.zip}
+بایستی ارسال شود. شماره دانشجویی تک تک هم گروهی ها بایستی توسط خط فاصله جدا بشوند.  فایل پی دی اف گزارش را در شاخه اصلی قرار دهید، به دیگر فایل های لاتک نیاز نمی باشد. یک شاخه به نام 
+\lr{\texttt{Codes}}
+درست کنید و کد های پروژه را داخل آن قرار بدهید. سپس یک شاخه به نام
+\lr{\texttt{Videos}}
+نیز درست نمایید و ویدئو ها را قرار دهید. نیاز هست برنامه را که روی کامپیوتر شخصی اجرا می کنید یک فیلم از صفحه گرفته شود و ارائه شود. خصوصا افرادی که با سخت افزار کار می کنند نیاز دارند تا یک فیلم از سخت افزار نیز بگیرند و به طرز صحیحی کارکرد برنامه با سخت افزار نشان داده شود. برای وضوح می توانید هنگام فیلم گرفتن روند کار را با صحبت توضیح دهید. توجه شود که ارائه درست و تمیز خروجی کار  اعم از ویدئو، زیبایی کد، و زیبایی برنامه گرافیکی طراحی شده در نمره مثمر ثمر می باشد. لطفا گزارش ارسالی تا حد امکان کوتاه و مختصر ولی در بر دارنده نکات کلیدی و مهم کار باشد.
+
+\end{document}
